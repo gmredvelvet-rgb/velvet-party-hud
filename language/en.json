@@ -1,0 +1,97 @@
+{
+  "VPH": {
+    "players": "Players",
+    "npcs": "NPCs",
+    "hp": "Hit points",
+    "ac": "Armor class",
+    "speed": "Speed",
+    "actionsFor": "Actions for",
+    "expandCard": "Expand stat bar",
+    "collapseCard": "Collapse stat bar",
+    "expandPanel": "Expand panel",
+    "minimizePanel": "Minimize panel",
+    "moveHint": "Drag to move. Arrow keys: move; Shift: larger step.",
+    "resizeHint": "Drag to resize. Left/right arrow keys: adjust width.",
+    "reorder": "Drag to reorder",
+    "empty": "No characters. The GM can configure the roster.",
+    "openSheet": "Open character sheet",
+    "manageRoster": "Configure roster",
+    "configureRoster": "Choose players and NPCs",
+    "rosterHint": "Add actors or tokens to either panel. The roster is shared; layout and theme are personal.",
+    "addplayers": "Add to players",
+    "addnpcs": "Add to NPCs",
+    "remove": "Remove from HUD",
+    "rosterRemoveHint": "Removing hides the character from the HUD even when detected automatically. Add it again to restore it.",
+    "resetRoster": "Restore automatic roster",
+    "token": "token",
+    "resetLayout": "Reset layout",
+    "resetHint": "Return both panels to their default positions and widths, expand all bars and clear your custom order.",
+    "classic": "Classic",
+    "darkest": "D. Dungeon",
+    "eclipse": "Velvet Eclipse",
+    "auto": "Automatic: combat, VND and player characters",
+    "manual": "Manual: selected actors only",
+    "settings": {
+      "enabled": {
+        "name": "Show Party HUD",
+        "hint": "Enable or disable both panels in this browser."
+      },
+      "showPlayers": {
+        "name": "Show player panel",
+        "hint": "Personal browser preference."
+      },
+      "showNpcs": {
+        "name": "Show NPC panel",
+        "hint": "Personal browser preference."
+      },
+      "theme": {
+        "name": "Visual style",
+        "hint": "Classic, D. Dungeon or the new Velvet Eclipse. Quick actions use the same style."
+      },
+      "replaceVnd": {
+        "name": "Replace VND side HUD",
+        "hint": "Hide its side panels to avoid duplicates while Party HUD is enabled."
+      },
+      "showHpNumbers": {
+        "name": "Show HP numbers to everyone",
+        "hint": "The GM and owners always see their numbers. Enable to also reveal others' HP, including NPCs."
+      },
+      "source": {
+        "name": "Roster source",
+        "hint": "Automatic combines the current scene's combat, VND cast and player-owned characters; Manual uses only your selection."
+      }
+    },
+    "qa": {
+      "attacks": "Actions",
+      "spells": "Spells",
+      "items": "Items",
+      "feats": "Feats",
+      "cantrip": "Cantrip",
+      "spellLevel": "Lvl {n}",
+      "spellRank": "Rank {n}",
+      "impulse": "Impulse",
+      "actionCost": "{n} actions",
+      "reaction": "Reaction",
+      "freeAction": "Free action",
+      "emptyCat": "Nothing here.",
+      "emptyAll": "This actor has no usable attacks, spells or items.",
+      "all": "All"
+    },
+    "notify": {
+      "qaFailed": "The action failed. See the console for details.",
+      "actorNotFound": "Actor not found.",
+      "qaCantUse": "Couldn't use that from here — try the character sheet."
+    },
+    "ui": {
+      "closeShort": "Close"
+    },
+    "license": {
+      "title": "License and Patreon support",
+      "open": "Open license",
+      "hint": "Open Velvet License Hub to manage Patreon. The HUD works with or without a subscription.",
+      "fallback": "The HUD remains available. Velvet License Hub is unavailable; install or enable version 2 to manage Patreon and shared reminders.",
+      "installHub": "Velvet License Hub manifest",
+      "dismiss": "Dismiss"
+    }
+  }
+}

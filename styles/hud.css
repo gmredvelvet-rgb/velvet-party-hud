@@ -1,0 +1,631 @@
+/* Plate and quick-action styles adapted from VN Dialogues Enhanced. Copyright (c) 2024–2025 GM RedVelvet / The GM Studio. See LICENSE. */
+/* ── The plate: TRANSPARENT shell. The HUD body lives on .vph-cast-plate so the
+   hexagon portrait embeds into the bar panel's edge instead of floating on top
+   of a second rectangle. ─────────────────────────────────────────────────── */
+.vph-panel .vph-cast-portrait.vph-has-plate {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  max-width: none;
+  height: var(--cp-plate-h);
+  min-height: var(--cp-plate-h);
+  max-height: var(--cp-plate-h);
+  flex: 0 0 auto;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+  transform: none;
+}
+.vph-panel.vph-right-panel .vph-cast-portrait.vph-has-plate {
+  flex-direction: row-reverse;
+}
+.vph-panel .vph-cast-portrait.vph-has-plate:hover { transform: none; }
+
+/* ── Portrait — hexagon with a metal gold frame (::before), sitting on top of
+   the bar panel's edge so the two read as one integrated unit. ───────────── */
+.vph-panel .vph-has-plate::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 2px;
+  width: calc(var(--cp-port) + 8px);
+  height: calc(var(--cp-port) + 8px);
+  transform: translateY(-50%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: linear-gradient(155deg, var(--cp-gold-hi) 0%, var(--cp-gold) 45%, #6e4f1c 100%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.7);
+  z-index: 3;
+  pointer-events: none;
+}
+.vph-panel.vph-right-panel .vph-has-plate::before {
+  left: auto; right: 2px;
+}
+.vph-panel .vph-has-plate .vph-cast-img {
+  position: relative;
+  z-index: 4;
+  width: var(--cp-port);
+  height: var(--cp-port);
+  flex: 0 0 var(--cp-port);
+  margin: 0 -20px 0 6px;          /* right overlap pulls the panel under the portrait */
+  object-fit: cover;
+  object-position: top center;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: #0c0f16;
+  border: none;
+  box-shadow: none;
+  filter: none !important;
+  transform: none !important;
+}
+.vph-panel.vph-right-panel .vph-has-plate .vph-cast-img {
+  margin: 0 6px 0 -20px;
+}
+
+/* ── Bars panel — the single dark-glass HUD body. Straight inner edge tucks
+   behind the portrait; rounded outer edge. ──────────────────────────────── */
+.vph-panel .vph-cast-plate {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+  padding: 7px 12px 7px 30px;     /* left pad clears the embedded portrait */
+  border-radius: 0 9px 9px 0;
+  /* Solid, high-contrast HUD body so each card reads clearly over a dark,
+     dimmed scene (behind the VS duel) — no washed-out / hazy look. */
+  background: linear-gradient(180deg, rgba(38,32,22,0.99) 0%, rgba(16,13,9,1) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,240,200,0.12),
+    inset 0 0 0 1px rgba(200,155,60,0.45),
+    0 0 0 1px rgba(0,0,0,0.85),
+    0 4px 16px rgba(0,0,0,0.7);
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+  pointer-events: none;
+}
+.vph-panel.vph-right-panel .vph-cast-plate {
+  padding: 7px 30px 7px 12px;
+  border-radius: 9px 0 0 9px;
+}
+
+/* Name — engraved gold label above HP */
+.vph-panel .vph-cp-name {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cp-gold-hi);
+  text-shadow: 0 1px 1px #000, 0 0 6px rgba(200,155,60,0.25);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+  padding: 0 1px;
+}
+.vph-panel.vph-right-panel .vph-cp-name { text-align: right; }
+
+/* HP bar — glass tube, dark-crimson empty track, health-coloured fill, gold digits.
+   The fill colour comes from JS (health green→amber→red) and is left intact. */
+.vph-panel .vph-cp-hp {
+  position: relative;
+  height: 19px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #351212 0%, #170606 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,0.85),
+    inset 0 0 0 2px rgba(200,155,60,0.28),
+    inset 0 3px 5px rgba(0,0,0,0.55);
+  overflow: hidden;
+}
+.vph-panel .vph-cp-hp-fill {
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  border-radius: 3px 0 0 3px;
+  transition: width 0.35s ease, background 0.35s ease;
+  box-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
+.vph-panel.vph-right-panel .vph-cp-hp-fill {
+  left: auto; right: 0; border-radius: 0 3px 3px 0;
+}
+/* Glass gloss over the fill */
+.vph-panel .vph-cp-hp-fill::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.16) 44%,
+    rgba(0,0,0,0.10) 56%, rgba(0,0,0,0.34) 100%);
+}
+.vph-panel .vph-cp-hp-text {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: 11px;
+  color: #fff3d6;
+  text-shadow: 0 1px 2px #000, 0 0 4px rgba(0,0,0,0.95);
+  letter-spacing: 0.02em;
+  z-index: 2;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Secondary bar (initiative rail) — thinner, part of the same HUD piece ── */
+.vph-panel .vph-cp-init {
+  position: relative;
+  height: 11px;
+  width: 100%;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #14263a 0%, #070f18 100%);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.8), inset 0 0 0 2px rgba(120,165,215,0.22);
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  overflow: visible;
+}
+.vph-panel.vph-right-panel .vph-cp-init {
+  padding-left: 0; padding-right: 24px; justify-content: flex-end;
+}
+/* Fill sheen on the secondary rail */
+.vph-panel .vph-cp-init::before {
+  content: "";
+  position: absolute; inset: 1px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(96,168,236,0.6) 0%, rgba(30,80,140,0.12) 92%);
+}
+.vph-panel.vph-right-panel .vph-cp-init::before {
+  background: linear-gradient(270deg, rgba(96,168,236,0.6) 0%, rgba(30,80,140,0.12) 92%);
+}
+/* Initiative — number in a gold metal diamond badge riding the rail's end */
+.vph-panel .vph-cp-init-num {
+  position: absolute;
+  left: -4px;
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  color: #241701;
+  font-weight: 900;
+  font-size: 11px;
+  line-height: 1;
+  z-index: 3;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 0 rgba(255,240,200,0.5);
+}
+.vph-panel.vph-right-panel .vph-cp-init-num { left: auto; right: -4px; }
+.vph-panel .vph-cp-init-num::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(155deg, var(--cp-gold-hi) 0%, var(--cp-gold) 50%, #7a591f 100%);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(0,0,0,0.55);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+/* ── Active turn: gold glow on the bar panel, brighter portrait ──────────── */
+.vph-panel .vph-has-plate.vph-speaking .vph-cast-plate {
+  background: linear-gradient(180deg, rgba(48,38,20,0.96) 0%, rgba(18,14,8,0.96) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,240,200,0.12),
+    inset 0 0 0 1px rgba(242,217,140,0.6),
+    0 0 16px rgba(200,155,60,0.45),
+    0 4px 16px rgba(0,0,0,0.6);
+}
+.vph-panel .vph-has-plate.vph-speaking::before {
+  background: linear-gradient(155deg, #fff2c8 0%, var(--cp-gold-hi) 45%, var(--cp-gold) 100%);
+  box-shadow: 0 0 12px rgba(242,217,140,0.7), 0 3px 8px rgba(0,0,0,0.7);
+}
+.vph-panel .vph-has-plate.vph-speaking .vph-cast-img {
+  filter: brightness(1.08) saturate(1.06) !important;
+}
+
+/* ── Target: red frame + glow, structure untouched ───────────────────────── */
+.vph-panel .vph-has-plate.vph-combat-target .vph-cast-plate,
+.vph-panel .vph-has-plate.vph-targeted .vph-cast-plate {
+  box-shadow:
+    inset 0 1px 0 rgba(255,200,200,0.10),
+    inset 0 0 0 1px rgba(220,70,70,0.78),
+    0 0 14px rgba(200,40,40,0.45),
+    0 4px 14px rgba(0,0,0,0.6);
+}
+.vph-panel .vph-has-plate.vph-combat-target::before,
+.vph-panel .vph-has-plate.vph-targeted::before {
+  background: linear-gradient(155deg, #f2a0a0 0%, #b53030 50%, #5c1414 100%);
+  box-shadow: 0 0 10px rgba(200,40,40,0.6), 0 3px 8px rgba(0,0,0,0.7);
+}
+
+/* ── Defeated: dark overlay, desaturated, still recognizable ──────────────── */
+.vph-panel .vph-has-plate.vph-defeated .vph-cast-plate {
+  box-shadow: inset 0 0 0 1px rgba(120,120,120,0.22), 0 3px 10px rgba(0,0,0,0.6);
+  background: linear-gradient(180deg, rgba(20,18,15,0.94) 0%, rgba(9,8,6,0.96) 100%);
+}
+.vph-panel .vph-has-plate.vph-defeated::before {
+  background: linear-gradient(155deg, #6b6b6b 0%, #3a3a3a 100%);
+}
+.vph-panel .vph-has-plate.vph-defeated .vph-cast-img {
+  filter: grayscale(1) brightness(0.42) !important;
+}
+.vph-panel .vph-has-plate.vph-defeated .vph-cast-plate { opacity: 0.55; }
+
+#vph-qa-window {
+  position: fixed;
+  z-index: 100000;
+  width: 344px;
+  max-height: 72vh;
+  display: flex;
+  flex-direction: column;
+  --qa-bronze:   #b08a3e;
+  --qa-bronze-hi:#d8b566;
+  --qa-ink:      #ded2b6;
+  --qa-ink-dim:  #8f846b;
+  color: #ded2b6;
+  background:
+    linear-gradient(180deg, rgba(23,20,15,0.985) 0%, rgba(11,9,7,0.99) 100%);
+  border: 1px solid #000;
+  border-radius: 8px;
+  box-shadow:
+    inset 0 1px 0 rgba(216,181,102,0.10),
+    inset 0 0 0 1px rgba(176,138,62,0.22),
+    0 20px 54px rgba(0,0,0,0.8);
+  pointer-events: all;
+  overflow: hidden;
+  animation: vph-qa-in 0.16s ease;
+}
+@keyframes vph-qa-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.vph-qa-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, rgba(30,25,17,0.96) 0%, rgba(15,12,8,0.96) 100%);
+  border-bottom: 1px solid rgba(176,138,62,0.30);
+}
+.vph-qa-portrait {
+  width: 38px; height: 38px; flex: 0 0 38px;
+  object-fit: cover; object-position: top center;
+  border-radius: 4px;
+  border: 1px solid #000;
+  box-shadow: inset 0 0 0 1px rgba(176,138,62,0.45);
+}
+.vph-qa-title {
+  flex: 1; min-width: 0;
+  font-weight: 700; font-size: 0.98em; letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--qa-bronze-hi);
+  text-shadow: 0 1px 2px #000;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.vph-qa-close {
+  width: 28px; height: 28px; flex: 0 0 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px;
+  color: #9a8f76; cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.vph-qa-close:hover { color: #f2d9d0; border-color: rgba(180,60,60,0.6); }
+
+/* Tabs — segmented metal control with a bronze underline on the active one */
+.vph-qa-tabs {
+  display: flex; gap: 0;
+  padding: 8px 8px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.6);
+}
+.vph-qa-tab {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  padding: 8px 4px;
+  background: none; border: none;
+  border-bottom: 2px solid transparent;
+  color: #8f836a; font-size: 0.76em; font-weight: 700; letter-spacing: 0.04em;
+  text-transform: uppercase; cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.vph-qa-tab i { font-size: 1.05em; opacity: 0.85; }
+.vph-qa-tab:hover { color: var(--qa-ink); }
+.vph-qa-tab-active {
+  color: var(--qa-bronze-hi);
+  border-bottom-color: var(--qa-bronze);
+}
+.vph-qa-count {
+  font-size: 0.82em; font-weight: 700; opacity: 0.75;
+  background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.06);
+  padding: 0 5px; border-radius: 7px; min-width: 16px; text-align: center;
+}
+
+/* Entries — a vertical list of framed rows, like a grimoire / satchel */
+.vph-qa-grid {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 8px; overflow-y: auto; min-height: 0;
+  scrollbar-width: thin;
+}
+.vph-qa-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: 46px 1fr auto;
+  align-items: center;
+  column-gap: 11px;
+  padding: 6px 10px 6px 6px;
+  background: rgba(255,255,255,0.018);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-left: 3px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.13s ease, border-color 0.13s ease;
+}
+.vph-qa-entry::before {   /* quiet inset bevel, no glow */
+  content: ""; position: absolute; inset: 0; border-radius: 5px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+.vph-qa-entry:hover {
+  background: rgba(216,181,102,0.09);
+  border-color: rgba(176,138,62,0.30);
+  border-left-color: var(--qa-bronze);
+}
+.vph-qa-entry:active { background: rgba(216,181,102,0.14); }
+.vph-qa-entry img {
+  width: 42px; height: 42px; grid-row: 1 / -1;
+  object-fit: contain;
+  border-radius: 4px;
+  background: radial-gradient(circle at 50% 35%, rgba(60,50,32,0.5) 0%, rgba(0,0,0,0.6) 100%);
+  border: 1px solid #000;
+  box-shadow: inset 0 0 0 1px rgba(176,138,62,0.30);
+  pointer-events: none;
+}
+.vph-qa-entry-text { min-width: 0; }
+.vph-qa-entry-name {
+  font-size: 0.82em; font-weight: 600; line-height: 1.2;
+  color: var(--qa-ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.vph-qa-entry-sub {
+  font-size: 0.66em; font-weight: 600; letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #8a7f66; margin-top: 1px;
+}
+.vph-qa-empty { text-align: center; padding: 26px 8px; color: #8a7f66; font-size: 0.85em; }
+
+/* Themed scrollbar inside the list */
+.vph-qa-grid::-webkit-scrollbar { width: 8px; }
+.vph-qa-grid::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+.vph-qa-grid::-webkit-scrollbar-thumb {
+  background: rgba(176,138,62,0.35); border-radius: 4px; border: 2px solid rgba(0,0,0,0.4);
+}
+.vph-qa-grid::-webkit-scrollbar-thumb:hover { background: rgba(216,181,102,0.55); }
+
+/* Muted category tints on the portrait-menu quick-action entries */
+.vph-portrait-action-menu .vph-pam-attack i { color: #cf7d5f; }
+.vph-portrait-action-menu .vph-pam-spell  i { color: #7fb0d8; }
+.vph-portrait-action-menu .vph-pam-feat   i { color: #b79bd8; }
+.vph-portrait-action-menu .vph-pam-item   i { color: #c2a758; }
+
+/* PF2e Multiple Attack Penalty buttons — compact chips on the right of the row */
+.vph-qa-map {
+  grid-column: 3; grid-row: 1 / -1;
+  display: flex; gap: 3px; align-items: center;
+}
+.vph-qa-map-btn {
+  min-width: 26px;
+  padding: 4px 5px;
+  font-size: 0.64em; font-weight: 800;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(180,90,70,0.35);
+  border-radius: 3px;
+  color: #c99283;
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.vph-qa-map-btn:hover {
+  background: rgba(80,32,26,0.85);
+  border-color: rgba(200,100,80,0.7);
+  color: #f2d0c6;
+}
+.vph-qa-map-btn:active { background: rgba(110,44,34,0.95); }
+
+/* Filter chips — quiet segmented pills under the tabs */
+.vph-qa-filters {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  padding: 8px 8px 2px;
+}
+.vph-qa-filter {
+  padding: 3px 10px;
+  font-size: 0.68em; font-weight: 700; letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 3px;
+  color: #8a7f66;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.vph-qa-filter:hover { color: #ded2b6; border-color: rgba(176,138,62,0.35); }
+.vph-qa-filter-active {
+  background: rgba(176,138,62,0.20);
+  border-color: rgba(176,138,62,0.55);
+  color: #d8b566;
+}
+
+/* Floating panels: only the cards and slim header intercept the map. */
+.vph-panel {
+  position: fixed; z-index: 10030; display: flex; flex-direction: column;
+  width: 288px; min-width: 148px; padding: 0; pointer-events: none;
+  --cp-gold: #c89b3c; --cp-gold-hi: #f2d98c; --cp-port: 70px; --cp-plate-h: 78px;
+  color: #f2d98c; font-family: Georgia, "Palatino Linotype", serif;
+}
+.vph-panel *, #vph-menu *, #vph-qa-window * { box-sizing: border-box; }
+.vph-header {
+  display: flex; gap: 4px; align-items: center; pointer-events: auto;
+  margin: 0 4px 6px; padding: 3px 5px; min-height: 28px;
+  background: linear-gradient(180deg, #282319ed, #100e0cef);
+  border: 1px solid #98723a66; border-radius: 4px; box-shadow: 0 3px 12px #0007;
+}
+.vph-panel button, #vph-menu button { font-family: inherit; cursor: pointer; }
+.vph-header button {
+  display: grid; place-items: center; flex: 0 0 24px; width: 24px; height: 24px;
+  padding: 0; margin: 0; border: 0; border-radius: 3px; background: #171411;
+  color: inherit; box-shadow: none; line-height: 1;
+}
+.vph-panel-drag {
+  display: flex; align-items: center; gap: 7px; min-width: 0; flex: 1;
+  cursor: move; touch-action: none; user-select: none; font-size: 11px;
+  text-transform: uppercase; letter-spacing: .08em; padding: 3px 0;
+}
+.vph-panel-drag > b { margin-left: auto; color: #b9a583; font: 11px Arial, sans-serif; }
+.vph-panel-drag > span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.vph-panel-drag > i { opacity: .5; }
+.vph-list {
+  display: flex; flex-direction: column; gap: 9px; overflow-y: auto; overflow-x: hidden;
+  min-height: 0; padding: 4px 5px 12px; pointer-events: none;
+  scrollbar-width: thin; scrollbar-color: #8b6c35 transparent;
+}
+.vph-panel .vph-cast-portrait { pointer-events: auto; }
+.vph-panel .vph-cast-plate { min-height: 57px; }
+.vph-panel .vph-cp-init { height: 12px; }
+.vph-panel .vph-cp-stats {
+  display: flex; align-items: center; justify-content: flex-end; gap: 6px;
+  width: 100%; position: relative; z-index: 2; font: 9px Arial, sans-serif; color: #e4eac9;
+}
+.vph-panel .vph-cp-stats span { display: flex; align-items: center; gap: 2px; }
+.vph-panel .vph-cp-stats i { font-size: 8px; color: #a9cee8; }
+.vph-panel .vph-cp-effects {
+  position: absolute; left: 6px; bottom: 0; display: flex; gap: 2px;
+  max-width: 78px; flex-wrap: wrap; z-index: 8; pointer-events: none;
+}
+.vph-panel.vph-right-panel .vph-cp-effects { left: auto; right: 6px; }
+.vph-cp-effects img { width: 13px; height: 13px; border: 1px solid #bca068; border-radius: 2px; background: #141414; }
+.vph-panel .vph-card-open {
+  position: absolute; inset: 0; z-index: 6; width: 100%; height: 100%; padding: 0;
+  border: 0; box-shadow: none; border-radius: 0; margin: 0; background: transparent;
+}
+.vph-panel .vph-card-open:hover { background: #ffffff05; box-shadow: none; }
+.vph-panel .vph-fold {
+  position: absolute; right: 3px; top: 1px; z-index: 10; width: 18px; height: 18px;
+  min-height: 0; padding: 0; margin: 0; background: #151310da; color: var(--cp-gold-hi);
+  border: 1px solid #8a74494d; border-radius: 3px; font-size: 10px; line-height: 16px;
+}
+.vph-panel.vph-right-panel .vph-fold { right: auto; left: 3px; }
+.vph-order-handle {
+  position: absolute; top: 2px; left: 2px; z-index: 10; cursor: grab; padding: 3px;
+  font-size: 9px; color: #dec591; opacity: .3;
+}
+.vph-panel.vph-right-panel .vph-order-handle { left: auto; right: 2px; }
+.vph-cast-portrait:hover .vph-order-handle { opacity: 1; }
+.vph-panel .vph-card-collapsed { width: calc(var(--cp-port) + 14px); }
+.vph-panel.vph-right-panel .vph-card-collapsed { align-self: flex-end; }
+.vph-panel .vph-card-collapsed .vph-cast-plate { display: none; }
+.vph-panel .vph-card-collapsed .vph-cast-img { margin: 0 6px; }
+.vph-minimized .vph-list, .vph-minimized .vph-resize { display: none; }
+.vph-minimized .vph-header { margin-bottom: 0; }
+.vph-resize {
+  position: absolute; right: 0; top: 34px; bottom: 0; width: 7px; z-index: 12;
+  cursor: ew-resize; touch-action: none; pointer-events: auto;
+  border-radius: 4px; background: #d4b36f15;
+}
+.vph-resize:hover, .vph-resize:focus-visible { background: #d4b36f88; }
+.vph-empty { pointer-events: auto; font: 11px Arial, sans-serif; margin: 0; padding: 14px; color: #cbb890; background: #151310c9; border-radius: 4px; }
+.vph-panel :focus-visible, #vph-menu button:focus-visible { outline: 2px solid var(--cp-gold-hi, #e5bc65); outline-offset: -2px; }
+
+#vph-menu {
+  position: fixed; z-index: 10040; min-width: 205px; padding: 5px;
+  color: #dfd2b7; border: 1px solid #90734266; border-radius: 4px;
+  background: linear-gradient(180deg, #211d15fa, #0b0a08fa); box-shadow: 0 8px 24px #000b;
+}
+#vph-menu button {
+  display: flex; align-items: center; gap: 9px; width: 100%; min-height: 30px;
+  background: transparent; border: 0; margin: 0; padding: 6px 9px; color: inherit;
+  border-radius: 2px; text-align: left; font-size: 12px; box-shadow: none;
+}
+#vph-menu button:last-child { border-top: 1px solid #9e835633; margin-top: 4px; padding-top: 10px; }
+#vph-menu button:not(:disabled):hover { background: #d7b56818; }
+#vph-menu button:disabled { opacity: .4; cursor: default; }
+#vph-menu [data-cat="attacks"] i { color: #cf7d5f; }
+#vph-menu [data-cat="spells"] i { color: #7fb0d8; }
+#vph-menu [data-cat="feats"] i { color: #b79bd8; }
+#vph-menu [data-cat="items"] i { color: #c2a758; }
+#vph-qa-window { width: min(380px, calc(100vw - 16px)); max-height: min(72vh, calc(100vh - 16px)); z-index: 10050; }
+.vph-qa-header { flex-shrink: 0; }
+.vph-qa-map-btn { cursor: pointer; }
+.vph-qa-entry:focus-visible { outline: 2px solid #d8b566; outline-offset: -2px; }
+
+/* D. Dungeon: retained iron, parchment, blood red and ember palette. */
+.vph-theme-darkest { --cp-gold: #97451f; --cp-gold-hi: #dcc69a; color: #cfc09a; }
+.vph-theme-darkest .vph-header, #vph-menu.vph-theme-darkest, #vph-qa-window.vph-theme-darkest {
+  border-radius: 0; background: linear-gradient(180deg, #231a13f5, #090706f5);
+  border: 1px solid #080504; box-shadow: inset 0 0 0 1px #6b563766, 0 5px 16px #000b;
+}
+.vph-panel.vph-theme-darkest .vph-has-plate::before,
+.vph-panel.vph-theme-darkest .vph-cast-img { clip-path: polygon(9% 0, 92% 0, 100% 10%, 100% 90%, 92% 100%, 9% 100%, 0 90%, 0 10%); }
+.vph-panel.vph-theme-darkest .vph-cast-plate {
+  background: linear-gradient(180deg, #281c13, #0b0806); border-radius: 0;
+  box-shadow: inset 0 0 0 1px #6b5637, inset 0 0 16px #000b, 0 4px 12px #000c;
+}
+.vph-panel.vph-theme-darkest .vph-cp-hp { border-radius: 0; }
+.vph-panel.vph-theme-darkest .vph-cp-hp::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(90deg, transparent 0 12px, #0008 12px 14px);
+}
+.vph-panel.vph-theme-darkest .vph-speaking .vph-cast-plate {
+  background: linear-gradient(180deg, #342117, #100907);
+  box-shadow: inset 0 0 0 1px #c47616, 0 0 15px #a91e1e77, 0 5px 15px #000b;
+}
+.vph-panel.vph-theme-darkest .vph-cp-name { letter-spacing: .1em; color: #dac8a4; }
+.vph-theme-darkest .vph-qa-tab-active { color: #e2bd86; border-bottom-color: #a91e1e; }
+.vph-theme-darkest .vph-qa-entry:hover { border-left-color: #a91e1e; background: #a91e1e22; }
+
+/* Velvet Eclipse: a clear, compact silver/violet HUD with readable typography. */
+.vph-theme-eclipse { --cp-gold: #8896b9; --cp-gold-hi: #dee5ff; color: #dee5ff; }
+.vph-theme-eclipse .vph-header, #vph-menu.vph-theme-eclipse, #vph-qa-window.vph-theme-eclipse {
+  background: linear-gradient(140deg, #1b2335f2, #101421f5); border: 1px solid #8e9cbd55;
+  border-radius: 10px; box-shadow: 0 8px 24px #0008, inset 0 1px 0 #c4d4ff16;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+.vph-panel.vph-theme-eclipse { font-family: "Segoe UI", Arial, sans-serif; }
+.vph-panel.vph-theme-eclipse .vph-cast-plate {
+  background: linear-gradient(140deg, #20283bfa, #101725fc);
+  border-radius: 12px; box-shadow: inset 0 0 0 1px #99b0d44d, 0 6px 18px #0008;
+  padding-top: 9px; padding-bottom: 9px; gap: 6px;
+}
+.vph-panel.vph-theme-eclipse .vph-has-plate::before,
+.vph-panel.vph-theme-eclipse .vph-cast-img { clip-path: circle(49%); }
+.vph-panel.vph-theme-eclipse .vph-has-plate::before { background: linear-gradient(145deg, #e2eaff, #8992c4 50%, #465071); }
+.vph-panel.vph-theme-eclipse .vph-cp-name { font-size: 11px; letter-spacing: .02em; text-transform: none; color: #f0f2ff; }
+.vph-panel.vph-theme-eclipse .vph-cp-hp { height: 21px; border-radius: 6px; box-shadow: inset 0 0 0 1px #0009; }
+.vph-panel.vph-theme-eclipse .vph-cp-init { background: #111b2d; box-shadow: none; border-radius: 4px; }
+.vph-panel.vph-theme-eclipse .vph-cp-init::before { opacity: .25; }
+.vph-panel.vph-theme-eclipse .vph-speaking .vph-cast-plate {
+  background: linear-gradient(140deg, #2a3450, #151c31);
+  box-shadow: inset 0 0 0 1px #afc6ff, 0 0 14px #7c9de755;
+}
+.vph-theme-eclipse .vph-qa-entry { border-radius: 8px; }
+.vph-theme-eclipse .vph-qa-entry:hover { background: #8eabff15; border-color: #899ed655; border-left-color: #a3b8f5; }
+.vph-theme-eclipse .vph-qa-title, .vph-theme-eclipse .vph-qa-tab-active { color: #cbd7ff; }
+.vph-theme-eclipse .vph-qa-tab-active { border-color: #9fb5eb; }
+.vph-theme-eclipse .vph-qa-entry-name { color: #e7ebfa; }
+.vph-theme-eclipse .vph-qa-entry-sub { color: #9da9c6; }
+
+.vph-roster-editor .window-content { display: block; overflow-y: auto; padding: 16px; }
+.vph-roster-editor select { width: 100%; }
+.vph-roster-add { display: flex; gap: 6px; margin: 10px 0; }
+.vph-roster-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 4px 0; }
+.vph-roster-row button { flex: 0 0 28px; width: 28px; }
+.vph-roster-editor .hint { font-size: 12px; opacity: .8; }
+
+body.vph-replace-vnd #vne-main .vne-side-panel { display: none !important; }
+body.vph-replace-vnd:not(.vne-rpg-style):not(.vne-symbiote) #vne-main .vne-stage { grid-template-columns: 0 minmax(0, 1fr) 0 !important; }
+body.vph-replace-vnd.vne-hud-only:not(.vne-symbiote) #vne-main .vne-stage { grid-template-columns: 0 minmax(0, 1fr) 0 !important; }
+@media (prefers-reduced-motion: reduce) {
+  .vph-panel *, #vph-qa-window * { animation: none !important; transition: none !important; }
+}
+
+
+
+
+#vph-license-reminder {
+  position: fixed; right: 24px; bottom: 24px; z-index: 10050;
+  width: min(340px, calc(100vw - 48px)); padding: 18px;
+  background: #161923; color: #eee8d9; border: 1px solid #a78bfa;
+  border-radius: 10px; box-shadow: 0 8px 30px #0009; font: 14px/1.5 sans-serif;
+}
+#vph-license-reminder p { margin: 8px 0; }
+#vph-license-reminder a { color: #d4bdff; display: block; margin-bottom: 12px; }
+#vph-license-reminder button { color: #eee8d9; background: #282638; border: 1px solid #85709c; border-radius: 5px; padding: 5px 12px; cursor: pointer; }

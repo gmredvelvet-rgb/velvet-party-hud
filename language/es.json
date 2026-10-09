@@ -1,0 +1,97 @@
+{
+  "VPH": {
+    "players": "Jugadores",
+    "npcs": "NPCs",
+    "hp": "Puntos de vida",
+    "ac": "Clase de armadura",
+    "speed": "Velocidad",
+    "actionsFor": "Acciones de",
+    "expandCard": "Expandir barra",
+    "collapseCard": "Plegar barra",
+    "expandPanel": "Expandir panel",
+    "minimizePanel": "Minimizar panel",
+    "moveHint": "Arrastra para mover. Flechas: mover; Shift: paso mayor.",
+    "resizeHint": "Arrastra para cambiar el ancho. Flechas izquierda/derecha: ajustar.",
+    "reorder": "Arrastra para reordenar",
+    "empty": "Sin personajes. El GM puede configurar el grupo.",
+    "openSheet": "Abrir ficha del personaje",
+    "manageRoster": "Configurar grupo",
+    "configureRoster": "Elegir jugadores y NPCs",
+    "rosterHint": "Añade actores o tokens a cada panel. El grupo se comparte; la disposición y el estilo son personales.",
+    "addplayers": "Añadir a jugadores",
+    "addnpcs": "Añadir a NPCs",
+    "remove": "Quitar del HUD",
+    "rosterRemoveHint": "Quitar oculta el personaje del HUD, incluso si se detecta automáticamente. Añádelo de nuevo para restaurarlo.",
+    "resetRoster": "Restaurar grupo automático",
+    "token": "token",
+    "resetLayout": "Restablecer disposición",
+    "resetHint": "Devuelve ambos paneles a su posición y ancho inicial, expande las barras y elimina tu orden personalizado.",
+    "classic": "Clásico",
+    "darkest": "D. Dungeon",
+    "eclipse": "Velvet Eclipse",
+    "auto": "Automático: combate, VND y personajes de jugadores",
+    "manual": "Manual: sólo actores elegidos",
+    "settings": {
+      "enabled": {
+        "name": "Mostrar Party HUD",
+        "hint": "Activa o desactiva los dos paneles en este navegador."
+      },
+      "showPlayers": {
+        "name": "Mostrar panel de jugadores",
+        "hint": "Preferencia personal del navegador."
+      },
+      "showNpcs": {
+        "name": "Mostrar panel de NPCs",
+        "hint": "Preferencia personal del navegador."
+      },
+      "theme": {
+        "name": "Estilo visual",
+        "hint": "Clásico, D. Dungeon o el nuevo Velvet Eclipse. Se aplica también a las acciones rápidas."
+      },
+      "replaceVnd": {
+        "name": "Reemplazar HUD lateral de VND",
+        "hint": "Oculta sus paneles laterales para evitar duplicados mientras Party HUD está activo."
+      },
+      "showHpNumbers": {
+        "name": "Mostrar números de vida a todos",
+        "hint": "El GM y los dueños siempre ven sus cifras. Activa para mostrar también la vida de los demás, incluidos NPCs."
+      },
+      "source": {
+        "name": "Origen del grupo",
+        "hint": "Automático combina combate de la escena actual, reparto VND y personajes con dueño jugador; Manual usa sólo tu selección."
+      }
+    },
+    "qa": {
+      "attacks": "Acciones",
+      "spells": "Hechizos",
+      "items": "Objetos",
+      "feats": "Dotes",
+      "cantrip": "Truco",
+      "spellLevel": "Nv {n}",
+      "spellRank": "Rango {n}",
+      "impulse": "Impulso",
+      "actionCost": "{n} acciones",
+      "reaction": "Reacción",
+      "freeAction": "Acción libre",
+      "emptyCat": "Nada por aquí.",
+      "emptyAll": "Este actor no tiene ataques, hechizos ni objetos usables.",
+      "all": "Todos"
+    },
+    "notify": {
+      "qaFailed": "La acción falló. Revisa la consola para más detalles.",
+      "actorNotFound": "Actor no encontrado.",
+      "qaCantUse": "No se pudo usar desde aquí — prueba con la hoja de personaje."
+    },
+    "ui": {
+      "closeShort": "Cerrar"
+    },
+    "license": {
+      "title": "Licencia y apoyo en Patreon",
+      "open": "Abrir licencia",
+      "hint": "Abre Velvet License Hub para gestionar Patreon. El HUD funciona con o sin suscripción.",
+      "fallback": "El HUD sigue funcionando. Velvet License Hub no está disponible; instala o activa la versión 2 para gestionar Patreon y los recordatorios compartidos.",
+      "installHub": "Manifiesto de Velvet License Hub",
+      "dismiss": "Cerrar"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "velvet-party-hud",
+  "title": "Velvet Party HUD",
+  "description": "Movable, resizable and collapsible player/NPC panels, quick actions, three themes and a non-blocking Patreon soft gate managed by Velvet License Hub.",
+  "version": "1.0.0",
+  "compatibility": { "minimum": "14", "verified": "14" },
+  "authors": [{ "name": "GM RedVelvet" }],
+  "esmodules": ["scripts/main.js"],
+  "styles": ["styles/hud.css"],
+  "languages": [
+    { "lang": "en", "name": "English", "path": "language/en.json" },
+    { "lang": "es", "name": "Español", "path": "language/es.json" }
+  ],
+  "license": "LICENSE",
+  "url": "https://github.com/gmredvelvet-rgb/velvet-party-hud",
+  "readme": "https://github.com/gmredvelvet-rgb/velvet-party-hud#readme",
+  "bugs": "https://github.com/gmredvelvet-rgb/velvet-party-hud/issues",
+  "manifest": "https://github.com/gmredvelvet-rgb/velvet-party-hud/releases/latest/download/module.json",
+  "download": "https://github.com/gmredvelvet-rgb/velvet-party-hud/releases/download/v1.0.0/module.zip",
+  "relationships": {
+    "requires": [{
+      "id": "velvet-license-hub", "type": "module",
+      "manifest": "https://github.com/gmredvelvet-rgb/velvet-license-hub/releases/latest/download/module.json",
+      "compatibility": { "minimum": "2.0.0" }
+    }]
+  }
+}
